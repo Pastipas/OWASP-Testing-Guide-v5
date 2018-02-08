@@ -5,7 +5,7 @@ Ringkasan
 Pengujian seperti ini berfokus pada memverifikasi bagaimana skema pengesahan Horizontal telah dijalankan untuk masing-masing peran atau keistimewaannya untuk mendapatkan hak mengakses data dan sumber-sumber dari pengguna-pengguna yang lain yang memiliki peran dan keistimewaan yang sama.
 Melewati pengesahan Horizontal bisa terjadi ketika seorang penyerang mendapat akses ke lebih banyak sumber atau data dari yang biasanya diizinkan untuk mereka. Tingkat izin atau perubahan seperti tersebut mestinya akan dicegah oleh aplikasi. 
 Untuk setiap fungsi, perand dan permintaan tertentu yang dijalankan oleh aplikasi selama tahap setelah-pengesahan, hal tersebut perlu untuk diverifikasi kemballi:
--	Apakah mungin untuk mengakses sumber-sumber yang seharusnya bisa diakses oleh pengguna yang memiliki identitas yang berbeda namun memiliki peran dan keistimewaan yang sama? 
+-	Apakah memungkinkan untuk mengakses sumber-sumber yang seharusnya bisa diakses oleh pengguna yang memiliki identitas yang berbeda namun memiliki peran dan keistimewaan yang sama? 
 -	Apakah memungkinkan untuk menjalankan fungsi-fungsi pada sumber-sumber tersebut yang seharusnya bisa diakses oleh pengguna yang memiliki identitas yang berbeda? 
 
 Bagaimana melakukan Pengujian
