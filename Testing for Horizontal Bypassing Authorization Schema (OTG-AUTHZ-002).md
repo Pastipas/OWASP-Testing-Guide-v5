@@ -1,48 +1,48 @@
-Testing for Horizontal Bypassing Authorization Schema (OTG-AUTHZ-002)
+Pengujian yang Melewati Skema Pengesahan Horizontal (OTG-AUTHZ-002)
 
-Summary
+Ringkasan
 --------
-This kind of test focuses on verifying how the Horizontal authorization schema has been implemented for each role or privilege to get access rights to data and resources of other users with the same role or privilege.
-Horizontal authorization bypass may occur when an attacker gets access to more resources or data than they are normally allowed. Such elevation or changes should be prevented by the application. 
-For every function, specific role and request that the application executes during the post-authentication phase, it is necessary to verify:
--	Is it possible to access resources that should be accessible to a user that holds a different identity with the same role or privilege?
--	Is it possible to operate functions on resources that should be accessible to a user that holds a different identity?
+Pengujian seperti ini berfokus pada memverifikasi bagaimana skema pengesahan Horizontal telah dijalankan untuk masing-masing peran atau keistimewaannya untuk mendapatkan hak mengakses data dan sumber-sumber dari pengguna-pengguna yang lain yang memiliki peran dan keistimewaan yang sama.
+Melewati pengesahan Horizontal bisa terjadi ketika seorang penyerang mendapat akses ke lebih banyak sumber atau data dari yang biasanya diizinkan untuk mereka. Tingkat izin atau perubahan seperti tersebut mestinya akan dicegah oleh aplikasi. 
+Untuk setiap fungsi, perand dan permintaan tertentu yang dijalankan oleh aplikasi selama tahap setelah-pengesahan, hal tersebut perlu untuk diverifikasi kemballi:
+-	Apakah mungin untuk mengakses sumber-sumber yang seharusnya bisa diakses oleh pengguna yang memiliki identitas yang berbeda namun memiliki peran dan keistimewaan yang sama? 
+-	Apakah memungkinkan untuk menjalankan fungsi-fungsi pada sumber-sumber tersebut yang seharusnya bisa diakses oleh pengguna yang memiliki identitas yang berbeda? 
 
-How to test
+Bagaimana melakukan Pengujian
 ------------
-For each role:
-1.	Register/generate two users with the same role.
-2.	Generate and keep two different session tokens by authenticating the application (one session token for each user).
-3.	For every request, change the relevant parameters and the session token from token one to token two and diagnose the responses for each token.
-4.	An application will be considered vulnerable if the responses are the same, contain same private data or indicate successful operation on other users resource or data.
+Untuk setiap peran:
+1.	Daftar/buat dua pengguna dengan peran yang sama.
+2.	BUat dan simpan dua sesi token yang berbeda untuk pengesahan aplikasi (satu sesi token untuk setiap pengguna).
+3.	Untuk setiap permintaan, ganti parameter dan sesi token yang sesuai dari token satu ke token yang kedua dan periksa respon tiap-tiap token.
+4.	Sebuah aplikai akan dianggap rentan jika responnya sama, berisi data rahasia yang sama atau mengindikasikan pengoperasian yang berhasil pada sumber-sumber atau data pengguna yang lain.
 
-For example, suppose that the 'viewCCpincode.jsp' function is part of every account menu of the application with the same role, and it is possible to access it by requesting the following URL:
+Sebagai contoh, anggap saja fungsi 'viewCCpincode.jsp' merupakan bagian dari setiap menu akun dari aplikasi dengan peran yang sama, dan memungkinkan untuk mengaksesnya dengan meminta URL berikut:
 https://www.example.com/account/viewCCpincode.jsp 
 
-Then, the following HTTP request is generated when calling the viewCCpincode function:
+Kemudian, permintaa HTTP berikut dibuat saat memanggil fungsi viewCCpincode:
 POST /account/viewCCpincode.jsp HTTP/1.1
 Host: www.example.com
-[other HTTP headers]
-Cookie: SessionID=xh6Tm2DfgRp01AZ03
+[hulu HTTP yang lain]
+Kuki: SessionID=xh6Tm2DfgRp01AZ03
 
-Idpincode=user1
+Idpincode=pengguna1
 
-Valid and legitimate response:
+Respon yang sahih dan tepat:
 HTTP1.1 200 OK
-[other HTTP headers]
+[hulu HTTP yang lain]
 
 {“pincode”:8432}
-The attacker may try and execute that request with the same Idpincode parameter:
+Penyerang akan mencoba menjalankan permintaan tersebut dengan parameter Idpincode yang saman:
 POST /account/viewCCpincode.jsp HTTP/1.1
 Host: www.example.com
-[other HTTP headers]
-Cookie: SessionID=GbcvA1_ATTACKER_SESSION_6fhTscd
+[hulu HTTP yang lain]
+Kuki: SessionID=GbcvA1_ATTACKER_SESSION_6fhTscd
 
-Idpincode=user1
-If the response of the attacker’s request contains the same data (“pincode”:8432) the application is vulnerable.
+Idpincode=pengguna1
+Jika respon dari permintaan penyerang berisi data yang sama (“pincode”:8432) aplikasi dalam keadaan renta.
 
-Tools
+Peralatan
 -------
-Burp extension: Authorize.
-References
-OWASP Application Security Verification Standard 3.0.1, V4.1, 4.4, 4.9, 4.16.
+Ekstensi Burp: Disahkan.
+Rujukan
+Standar Verifikasi Keamanan Aplikasi OWASP 3.0.1, V4.1, 4.4, 4.9, 4.16.
